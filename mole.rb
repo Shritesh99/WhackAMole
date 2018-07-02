@@ -17,6 +17,7 @@ class Mole < Gosu::Window
     @font = Gosu::Font.new(30)
     @score = 0
     @playing = true
+    @start = 0
   end
   def draw
     if @visible > 0
@@ -38,6 +39,7 @@ class Mole < Gosu::Window
       @font.draw("Game Over!!", 300, 300, 3)
       @visible = 20
       @time_left = 0
+      @font.draw("Press Space Bar To Play Again", 180, 350, 3)
     end
   end
   def update
@@ -48,7 +50,7 @@ class Mole < Gosu::Window
      @velocity_y *= -1 if @y + @hieght / 2 > 600 || @y + @hieght / 2 < 0
      @visible -= 1
      @visible = 50 if @visible < -10 && rand < 0.01
-     @time_left = (60 - (Gosu.milliseconds / 1000))
+     @time_left = (60 - ((Gosu.milliseconds - @start) / 1000))
      @playing = false if @time_left < 1
    end
   end
@@ -62,6 +64,13 @@ class Mole < Gosu::Window
           @hit = -1
           @score -= 3
         end
+      end
+    else
+      if(id == Gosu::KbSpace)
+        @playing = true
+        @visible = -10
+        @start = Gosu.milliseconds
+        @score = 0
       end
     end
   end
