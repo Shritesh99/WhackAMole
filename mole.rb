@@ -5,6 +5,7 @@ class Mole < Gosu::Window
     super(800, 600)
     self.caption = "Wack a Mole"
     @image = Gosu::Image.new('media/mole.png')
+    @hammer = Gosu::image.new('media/hammer.png')
     @x = 200
     @y = 200
     @width = 100
@@ -17,6 +18,7 @@ class Mole < Gosu::Window
     if @visible > 0
        @image.draw(@x - @width / 2,@y - @hieght / 2, 1)
     end
+    @hammer.draw(mouse_x - 25, mouse_y - 25, 1)
   end
   def update
     @x += @velocity_x
