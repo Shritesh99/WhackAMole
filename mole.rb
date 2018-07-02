@@ -14,7 +14,9 @@ class Mole < Gosu::Window
     @visible = 0
   end
   def draw
-    @image.draw(@x - @width / 2,@y - @hieght / 2, 1)
+    if @visible > 0
+       @image.draw(@x - @width / 2,@y - @hieght / 2, 1)
+    end
   end
   def update
     @x += @velocity_x
@@ -22,6 +24,6 @@ class Mole < Gosu::Window
     @y += @velocity_y
     @velocity_y *= -1 if @y + @hieght / 2 > 600 || @y + @hieght / 2 < 0
     @visible -= 1
-    @visible = 50 if @visible < -10 && rand < 0.01
+    @visible = 30 if @visible < -10 && rand < 0.01
   end
 end
